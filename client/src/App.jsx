@@ -13,7 +13,8 @@ import {Loader} from "lucide-react"
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth} = useAuthStore();
-
+  //ui theme
+  const [darkTheme, setDarkTheme] = React.useState(false);
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -28,8 +29,8 @@ const App = () => {
 
   return (
     
-    <div>
-      <Navbar />
+    <div data-theme={darkTheme? "dark" : "light"} className="min-h-screen bg-base-100">
+      <Navbar setDarkTheme={setDarkTheme} darkTheme={darkTheme}/>
       <Routes>
         <Route path='/' element={authUser? <HomePage /> : <Navigate to="/login" />} />
          <Route path='/signup' element={!authUser? <SignupPage /> :<Navigate to="/" />} />

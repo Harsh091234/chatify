@@ -2,7 +2,7 @@ import Message from '../models/message.model.js';
 import cloudinary from '../utils/cloudinary.js';
 export const getMessagesById = async(req, res) => {
     try {
-        const {userToChatId} = req.params._id;
+        const userToChatId = req.params.id;
         const senderId = req.userId;
 
         const messages = await Message.find({
@@ -13,7 +13,7 @@ export const getMessagesById = async(req, res) => {
                 senderId: userToChatId, receiverId: senderId
             }
         ]
-        });
+        }).lean();
 
         res.status(200).json(messages);
     } catch (error) {
@@ -26,12 +26,12 @@ export const sendMessagesById = async(req, res) => {
     const {text, image} = req.body;
    try {
     
-    const {userToChatId} = req.params;
+    const userToChatId = req.params.id;
     const senderId = req.userId;
-
+let imageUrl = "";
     if(image){
         const cloudResponse = await cloudinary.uploader.upload(image);
-        const imageUrl = cloudResponse.secure_url;
+       imageUrl = cloudResponse.secure_url;
     }
 
     const newMessage = new Message({
@@ -40,6 +40,7 @@ export const sendMessagesById = async(req, res) => {
         senderId,
         receiverId: userToChatId
     })
+    await newMessage.save();
       res.status(201).json(newMessage);
    } catch (error) {
      console.log("Error sending message: ", error.message);

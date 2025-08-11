@@ -5,6 +5,7 @@ import { useAuthStore } from "../store/authStore";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import AuthImagePattern from "../components/AuthImagePattern";
+import GoogleLoginButton from '../components/ui/GoogleLoginButton';
 
 const SignupPage = () => {
  const { signup, isSigningUp } = useAuthStore();
@@ -35,12 +36,12 @@ const SignupPage = () => {
 
   }
   return (
-      <div className="min-h-screen grid lg:grid-cols-2">
+      <div   className="min-h-screen grid lg:grid-cols-2 ">
       {/* left side */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
+      <div className="flex flex-col justify-center items-center p-7 sm:p-12">
+        <div className="w-full max-w-md space-y-2">
           {/* LOGO */}
-          <div className="text-center mb-8">
+          <div className="text-center mt-10 mb-8">
             <div className="flex flex-col items-center gap-2 group">
               <div
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
@@ -140,6 +141,7 @@ const SignupPage = () => {
             </p>
           </div>
         </div>
+   
       </div>
 
       {/* right side */}

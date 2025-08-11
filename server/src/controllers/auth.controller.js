@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 import User from "../models/user.model.js";
 import generateTokenAndSetCookie from '../utils/generateTokenAndSetCookie.js';
 import  BlacklistToken  from '../models/blacklistToken.model.js';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const register = async (req, res) => {
   try {
@@ -100,4 +103,27 @@ export const logout = async(req, res) => {
   
 
   res.status(200).json({ message: 'Logged out successfully' });
+};
+
+export const googleLogin = async (req, res) => {
+  const { credential } = req.body;
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    let user = await User.findOne({ email: payload.email });
+    if (!user) {
+      user = await User.create({
+        fullname: payload.name,
+        email: payload.email,
+        profilePic: payload.picture,
+      });
+    }
+    generateTokenAndSetCookie(user._id, res);
+    res.json({ user });
+  } catch (err) {
+    res.status(401).json({ message: 'Google login failed' });
+  }
 };

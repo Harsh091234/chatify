@@ -1,7 +1,7 @@
 
 import { body } from 'express-validator';
 import express from 'express';
-import { register, login, logout } from '../controllers/auth.controller.js';
+import { register, login, logout,googleLogin  } from '../controllers/auth.controller.js';
 import verifyToken from '../middlewares/authenticateUser.js';
 
 
@@ -37,5 +37,7 @@ router.post('/register',[
 );
 
 router.post('/logout',verifyToken, logout);
+
+router.post('/google', googleLogin);
 
 export default router;
