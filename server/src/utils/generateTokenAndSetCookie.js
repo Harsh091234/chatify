@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const generateTokenAndSetCookie = (userId, res) => {
   const token = jwt.sign(
-    { id: userId },
+    { userId },
     process.env.JWT_SECRET,
     {
       expiresIn:'7d',

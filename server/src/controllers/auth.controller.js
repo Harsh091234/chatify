@@ -32,13 +32,13 @@ export const register = async (req, res) => {
 
     await newUser.save();
    const token = generateTokenAndSetCookie(newUser._id, res);
+
+    
     res.status(201).json({
       message: 'User registered successfully',
-      user: {
-        id: newUser._id,
-        fullname: newUser.fullname,
-        email: newUser.email,
-       
+      newUser: {
+        ...newUser._doc,
+        password: undefined,
       },
       token
     });
@@ -72,10 +72,8 @@ export const login = async (req, res) => {
       message: 'Login successful',
       token,
       user: {
-        id: user._id,
-        fullname: user.fullname,
-        email: user.email,
-        profilePic: user.profilePic,
+        ...user._doc,
+        password: undefined
       },
     });
   } catch (error) {

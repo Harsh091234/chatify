@@ -1,8 +1,9 @@
 
 
 import jwt from 'jsonwebtoken';
+import User from '../models/user.model.js';
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async(req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (!token) {
@@ -11,7 +12,16 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.id; 
+    const user = await User.findById(decoded.userId).select("-password");
+     if (!user) {
+      return res.status(401).json({ message: 'Unauthorized: User not found' });
+    }
+
+
+    req.user = user;
+   
+   
+
     next(); 
   } catch (err) {
     return res.status(401).json({ message: 'Unauthorized: Invalid token' });

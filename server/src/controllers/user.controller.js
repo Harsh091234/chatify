@@ -4,7 +4,7 @@ import User from "../models/user.model.js"
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, profilePic } = req.body;
-    const userId = req.userId;
+    const userId = req.user._id;
 
     let updatedData = { fullname };
 
@@ -22,15 +22,17 @@ export const updateProfile = async (req, res) => {
     });
 
     res.json(updatedUser);
+    
   } catch (error) {
     console.error("Error updating profile:", error);
     res.status(500).json({ message: "Error updating profile" });
   }
 };
+
 export const checkAuth = async(req, res) => {
     try {
-        const userId = req.userId;
-        const user = await User.findById(userId);
+        
+        const user = await User.findById(req.user._id).select("-password");
         if(!user){
             return res.status(400).json({message: "Unauthorized"});
         }
@@ -44,7 +46,7 @@ export const checkAuth = async(req, res) => {
 
 export const getUsersForSidebar = async(req, res) => {
    try {
-        const loggedInUserId = req.userId;
+        const loggedInUserId = req.user._id;
         const otherUsers = await User.find({_id: {$ne: loggedInUserId}}).select("-password");
         res.json({users: otherUsers})
    } catch (error) {

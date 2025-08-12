@@ -15,6 +15,7 @@ const App = () => {
   const { authUser, checkAuth, isCheckingAuth} = useAuthStore();
   //ui theme
   const [darkTheme, setDarkTheme] = React.useState(false);
+  
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
-import { LogOut, MessageSquare, Settings, User, Sun } from "lucide-react";
+import { LogOut, MessageSquare, Settings, User, Sun, House } from "lucide-react";
 import GoogleLoginButton from "./ui/GoogleLoginButton";
 
 const Navbar = ({darkTheme, setDarkTheme}) => {
@@ -38,12 +38,12 @@ const Navbar = ({darkTheme, setDarkTheme}) => {
               <span className="hidden sm:inline">Settings</span>
             </Link> */}
                 <Link to={"/"} className={`btn btn-sm gap-2`}>
-                  <User className="size-5" />
+                  <House className="size-4"/>
                   <span className="hidden sm:inline">Home</span>
                 </Link>
 
                 <Link to={"/profile"} className={`btn btn-sm gap-2`}>
-                  <User className="size-5" />
+                  <User className="size-4" />
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
 

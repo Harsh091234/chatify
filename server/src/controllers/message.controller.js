@@ -3,7 +3,7 @@ import cloudinary from '../utils/cloudinary.js';
 export const getMessagesById = async(req, res) => {
     try {
         const userToChatId = req.params.id;
-        const senderId = req.userId;
+        const senderId = req.user._id;
 
         const messages = await Message.find({
         $or:[
@@ -27,7 +27,7 @@ export const sendMessagesById = async(req, res) => {
    try {
     
     const userToChatId = req.params.id;
-    const senderId = req.userId;
+    const senderId = req.user._id;
 let imageUrl = "";
     if(image){
         const cloudResponse = await cloudinary.uploader.upload(image);
