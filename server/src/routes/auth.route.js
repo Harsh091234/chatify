@@ -38,6 +38,6 @@ router.post('/register',[
 
 router.post('/logout',verifyToken, logout);
 
-router.post('/google', googleLogin);
+// router.post('/google', googleLogin);
 
 export default router;
