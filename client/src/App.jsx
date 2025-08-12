@@ -12,7 +12,7 @@ import {Loader} from "lucide-react"
 
 
 const App = () => {
-  const { authUser, checkAuth, isCheckingAuth} = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers} = useAuthStore();
   //ui theme
   const [darkTheme, setDarkTheme] = React.useState(false);
   
@@ -21,6 +21,7 @@ const App = () => {
   }, [checkAuth]);
 
   console.log("authUser:", authUser)
+  console.log("online users: ", onlineUsers)
   if(isCheckingAuth && !authUser) return (
     <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin" />
