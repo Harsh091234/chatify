@@ -2,6 +2,11 @@ import { create } from "zustand";
 import { axiosInstance } from "../utils/axios";
 import toast from "react-hot-toast";
 import {io} from "socket.io-client"
+
+const VITE_SOCKET_URI = import.meta.env.MODE === "development" 
+? import.meta.env.VITE_SOCKET_URI : "/"; 
+
+
 export const useAuthStore = create((set, get) => ({
     authUser: null,
     isSigningUp: false,
@@ -83,7 +88,7 @@ export const useAuthStore = create((set, get) => ({
   connectSocket: async() => {
       const { authUser } = get();
     if (!authUser || get().socket?.connected) return;
-     const socket = io(import.meta.env.VITE_SOCKET_URI, {
+     const socket = io(VITE_SOCKET_URI, {
       query: {
         userId: authUser._id
       }
