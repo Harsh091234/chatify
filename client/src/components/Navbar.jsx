@@ -52,7 +52,9 @@ const Navbar = ({darkTheme, setDarkTheme}) => {
                   <span className="hidden sm:inline">Logout</span>
                 </button>
               </>
-            ):(<GoogleLoginButton  />)}
+            ):(
+          ""
+            )}
           </div>
         </div>
       </div>
