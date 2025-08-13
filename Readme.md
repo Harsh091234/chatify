@@ -95,9 +95,7 @@ CLOUDINARY_API_SECRET=your-api-secret
 #### Frontend (.env)
 Create a `.env` file in the `frontend` directory:
 ```env
-VITE_API_URL=http://localhost:5001/api
-VITE_SOCKET_URL=http://localhost:5001
-VITE_MODE=development
+MODE=development
 ```
 
 ### 🚀 Running the Application
