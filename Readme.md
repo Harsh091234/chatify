@@ -41,13 +41,13 @@ A modern, full-stack real-time chat application built with React and Node.js, fe
 - **Linting:** ESLint
 
 ## Screenshots
-![Screenshot 1](/client/public/screenshots/s1.png)
-![Screenshot 2](/client/public/screenshots/s2.png)
-![Screenshot 3](/client/public/screenshots/s3.png)
-![Screenshot 4](/client/public/screenshots/s4.png)
-![Screenshot 5](/client/public/screenshots/s5.png)
-![Screenshot 6](/client/public/screenshots/s6.png)
-![Screenshot 7](/client/public/screenshots/s7.png)
+![Screenshot 1](/client/public/Screenshots/s1.png)
+![Screenshot 2](/client/public/Screenshots/s2.png)
+![Screenshot 3](/client/public/Screenshots/s3.png)
+![Screenshot 4](/client/public/Screenshots/s4.png)
+![Screenshot 5](/client/public/Screenshots/s5.png)
+![Screenshot 6](/client/public/Screenshots/s6.png)
+![Screenshot 7](/client/public/Screenshots/s7.png)
 
 
 ## 🚀 Getting Started
