@@ -5,7 +5,7 @@ import { useAuthStore } from "../store/authStore";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import AuthImagePattern from "../components/AuthImagePattern";
-import GoogleLoginButton from '../components/ui/GoogleLoginButton';
+// import GoogleLoginButton from '../components/ui/GoogleLoginButton';
 
 const SignupPage = () => {
  const { signup, isSigningUp } = useAuthStore();
