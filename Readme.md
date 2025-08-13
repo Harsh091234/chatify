@@ -3,6 +3,10 @@
 A modern, full-stack real-time chat application built with React and Node.js, featuring secure authentication, real-time messaging, and a sleek UI.
 
 
+## 🚀 Live Preview
+
+**Demo URL:** [https://chatify-tzs4.onrender.com](https://chatify-tzs4.onrender.com)
+
 
 ##  ✨ Features
 
@@ -16,6 +20,7 @@ A modern, full-stack real-time chat application built with React and Node.js, fe
 - 🔍 **User Discovery** - Find and connect with other users
 
 ## 🛠️ Tech Stack
+
 
 ### 🎯 Frontend
 - **Framework:** React with Vite
