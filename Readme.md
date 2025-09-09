@@ -66,7 +66,7 @@ A modern, full-stack real-time chat application built with React and Node.js, fe
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/chatify.git
+   git clone https://github.com/Harsh091234/chatify.git
    cd chatify
    ```
 
