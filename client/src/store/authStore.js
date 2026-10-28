@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import {io} from "socket.io-client"
 
 const VITE_SOCKET_URI = import.meta.env.MODE === "development" 
-? "http://localhost:3000" : "/"
+? import.meta.env.VITE_BASE_SOCKET_URI : "/"
 ; 
 
 

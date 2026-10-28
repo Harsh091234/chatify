@@ -1,0 +1,43 @@
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      
+    container_name: chatify_client_container
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+     
+    env_file:
+      - ./client/.env
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: chatify_server_container
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./server:/app
+     
+    env_file:
+      - ./server/.env
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:8
+    container_name: chatify_db_container
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
