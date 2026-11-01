@@ -21,7 +21,7 @@ router.post('/register',[
       .withMessage('Password must be at least 6 characters long'),
   ], register );
 
-  router.post(
+router.post(
   '/login',
   [
     body('email')

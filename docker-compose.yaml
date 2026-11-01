@@ -30,6 +30,7 @@ services:
       - ./server/.env
     depends_on:
       - mongodb
+      - redis-cache
 
   mongodb:
     image: mongo:8
@@ -39,5 +40,36 @@ services:
     volumes:
       - mongodb_data:/data/db
 
+  redis-cache:
+    image: redis:7-alpine
+    container_name: chatify_redis_container
+    ports:
+      - "6380:6379"
+
+    # Configure Redis as a volatile cache
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis_insight_ui
+    restart: unless-stopped
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis_insight_data:/data
+    depends_on:
+      redis-cache:
+        condition: service_healthy
+   
+    
+    
+
 volumes:
   mongodb_data:
+  redis_insight_data:

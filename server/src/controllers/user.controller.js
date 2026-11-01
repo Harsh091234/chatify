@@ -32,11 +32,8 @@ export const updateProfile = async (req, res) => {
 export const checkAuth = async(req, res) => {
     try {
         
-        const user = await User.findById(req.user._id).select("-password");
-        if(!user){
-            return res.status(400).json({message: "Unauthorized"});
-        }
-        res.json(user);
+        
+        res.json(req.user);
     } catch (error) {
         console.error("Error checking auth:", error);
         return res.status(400).json({message: "Error checking auth"});
