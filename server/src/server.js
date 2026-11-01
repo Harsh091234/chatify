@@ -33,7 +33,9 @@ app.use(cors({
 app.use(morgan("dev"))
 app.use(express.json()); 
 
-
+app.use('/api/health', (_, res) => {
+  res.send("Server is healthy");
+});
 app.use("/api/redis", async (_req, res) => {
 try {
 const key = "test";
