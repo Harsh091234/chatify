@@ -29,8 +29,8 @@ services:
     env_file:
       - ./server/.env
     depends_on:
-      - redis-cache:
-          condition: service_healthy
+      - redis-cache
+        
     networks:
       - chatify_network
 
