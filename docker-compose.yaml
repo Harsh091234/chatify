@@ -21,28 +21,25 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: chatify_server_container
+    restart: unless-stopped
     ports:
-      - "5001:5001"
-    volumes:
+      - "127.0.0.1:5001:5001"  
       - ./server:/app
      
     env_file:
       - ./server/.env
     depends_on:
-      - mongodb
-      - redis-cache
+      - redis-cache:
+          condition: service_healthy
+    networks:
+      - chatify_network
 
-  mongodb:
-    image: mongo:8
-    container_name: chatify_db_container
-    ports:
-      - "27018:27017"
-    volumes:
-      - mongodb_data:/data/db
+  
 
   redis-cache:
     image: redis:7-alpine
     container_name: chatify_redis_container
+    restart: unless-stopped
     ports:
       - "6380:6379"
 
@@ -54,6 +51,9 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
+
+    networks:
+      - chatify_network
 
   # redis-insight:
   #   image: redis/redisinsight:latest
@@ -68,8 +68,6 @@ services:
   #       condition: service_healthy
    
     
-    
-
-volumes:
-  mongodb_data:
-  redis_insight_data:
+networks:
+  chatify_network:
+    driver: bridge
