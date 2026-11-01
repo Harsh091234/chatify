@@ -1,20 +1,20 @@
 
 services:
-  client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+  # client:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
       
-    container_name: chatify_client_container
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./client:/app
+  #   container_name: chatify_client_container
+  #   ports:
+  #     - "5173:5173"
+  #   volumes:
+  #     - ./client:/app
      
-    env_file:
-      - ./client/.env
-    depends_on:
-      - server
+  #   env_file:
+  #     - ./client/.env
+  #   depends_on:
+  #     - server
 
   server:
     build:
@@ -55,17 +55,17 @@ services:
       timeout: 3s
       retries: 5
 
-  redis-insight:
-    image: redis/redisinsight:latest
-    container_name: redis_insight_ui
-    restart: unless-stopped
-    ports:
-      - "5540:5540"
-    volumes:
-      - redis_insight_data:/data
-    depends_on:
-      redis-cache:
-        condition: service_healthy
+  # redis-insight:
+  #   image: redis/redisinsight:latest
+  #   container_name: redis_insight_ui
+  #   restart: unless-stopped
+  #   ports:
+  #     - "5540:5540"
+  #   volumes:
+  #     - redis_insight_data:/data
+  #   depends_on:
+  #     redis-cache:
+  #       condition: service_healthy
    
     
     

@@ -1,0 +1,75 @@
+
+services:
+  # client:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile.dev
+      
+  #   container_name: chatify_client_container
+  #   ports:
+  #     - "5173:5173"
+  #   volumes:
+  #     - ./client:/app
+     
+  #   env_file:
+  #     - ./client/.env
+  #   depends_on:
+  #     - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: chatify_server_container
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./server:/app
+     
+    env_file:
+      - ./server/.env
+    depends_on:
+      - mongodb
+      - redis-cache
+
+  mongodb:
+    image: mongo:8
+    container_name: chatify_db_container
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis-cache:
+    image: redis:7-alpine
+    container_name: chatify_redis_container
+    ports:
+      - "6380:6379"
+
+    # Configure Redis as a volatile cache
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # redis-insight:
+  #   image: redis/redisinsight:latest
+  #   container_name: redis_insight_ui
+  #   restart: unless-stopped
+  #   ports:
+  #     - "5540:5540"
+  #   volumes:
+  #     - redis_insight_data:/data
+  #   depends_on:
+  #     redis-cache:
+  #       condition: service_healthy
+   
+    
+    
+
+volumes:
+  mongodb_data:
+  redis_insight_data:
