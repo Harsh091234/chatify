@@ -21,4 +21,4 @@ jobs:
 
     steps:
       - name: Deploy application
-        run: bash /home/harsh/programming/chatify/deploy.sh
+        run: bash /home/ubuntu/chatify/deploy.sh
