@@ -1,0 +1,24 @@
+name: Deploy MERN Application
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: [self-hosted, linux, x64]
+
+    steps:
+      - name: Deploy application
+        run: bash /chatify/deploy.sh
