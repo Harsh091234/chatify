@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-APP_DIR="/chatify"
+APP_DIR="/home/ubuntu/chatify"
 BRANCH="main"
 FRONTEND_DIR="/var/www/myapp"
 COMPOSE_FILE="docker-compose.yaml"
